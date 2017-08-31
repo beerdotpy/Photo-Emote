@@ -37,3 +37,10 @@ class Like(models.Model):
     user_id = models.ForeignKey(User)
     image_id = models.ForeignKey(Image)
     pixels = models.CharField(max_length=50)
+    created_at = models.DateTimeField(editable=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.created_at = datetime.datetime.today()
+        return super(Like, self).save(*args, **kwargs)
+
