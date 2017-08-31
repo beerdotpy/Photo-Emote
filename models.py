@@ -6,10 +6,12 @@ import datetime
 class User(models.Model):
     device_id = models.CharField(max_length=255)
     user_id = models.CharField(max_length=10, editable=False)
+    created_at = models.DateTimeField(editable=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.user_id = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
+            self.created_at = datetime.datetime.today()
         return super(User,self).save(*args,**kwargs)
     
     def __unicode__(self):
