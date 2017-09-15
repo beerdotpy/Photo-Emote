@@ -34,10 +34,14 @@ class Image(models.Model):
             self.created_at = datetime.datetime.today()
         return super(Image, self).save(*args, **kwargs)
 
+    @property
+    def user(self):
+        return self.user_id.user_id
+
 class Like(models.Model):
     like_type = models.CharField(max_length=20, default="Like")
     user_id = models.ForeignKey(User)
-    image_id = models.ForeignKey(Image)
+    image_id = models.ForeignKey(Image, related_name='likes')
     pixels = models.CharField(max_length=50)
     created_at = models.DateTimeField(editable=False)
 

@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^user/create', views.createUser, name="createUser"),
     url(r'^image/create', views.createImage, name="createImage"),
     url(r'^image/feed', views.imageFeed, name="imageFeed"),
+    url(r'^like/action', views.onLikeImage, name="onLikeImage"),
 ]
 
 admin.site.site_header = 'PhotEmote Adminstration'
