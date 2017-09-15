@@ -8,7 +8,7 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ('id', 'image_id', 'url', 'user_id', 'created_at', 'description', 'orientation')
 
 class LikeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'like_type', 'user_id', 'pixels')
+    list_display = ('id', 'like_type', 'image_id', 'user_id', 'pixels')
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Image, ImageAdmin)
