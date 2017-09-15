@@ -25,4 +25,4 @@ urlpatterns = [
     url(r'^like/action', views.onLikeImage, name="onLikeImage"),
 ]
 
-admin.site.site_header = 'PhotEmote Adminstration'
+admin.site.site_header = 'PhotoEmote Adminstration'
