@@ -4,6 +4,7 @@ from models import User, Image, Like
 from django.core.files import File
 from serializers import ImageSerializer, UserSerializer
 from rest_framework.renderers import JSONRenderer
+import json
 
 #prod_URL = ""
 debug_URL = "http://localhost:8000/"
