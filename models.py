@@ -23,6 +23,7 @@ class Image(models.Model):
     user_id = models.ForeignKey(User)
     created_at = models.DateTimeField(editable=False)
     description = models.TextField()
+    hashtags = models.TextField()
     orientation = models.CharField(max_length=100)
 
     def __unicode__(self):
