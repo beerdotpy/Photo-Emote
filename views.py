@@ -4,7 +4,6 @@ from models import User, Image, Like
 from django.core.files import File
 from serializers import ImageSerializer, UserSerializer
 from rest_framework.renderers import JSONRenderer
-import json
 
 #prod_URL = ""
 debug_URL = "http://localhost:8000/"
@@ -22,14 +21,14 @@ def createUser(request):
 
 @csrf_exempt
 def createImage(request):
-    data = json.loads(request.body)
+    data = request.POST
     try:
         user = User.objects.get(user_id = data['user_id'])
     except:
         return HttpResponse(status = 404)
 
-    image = Image.objects.create(user_id = user, url = data['image'], description = data['description'],\
-                orientation = data['orientation'])
+    image = Image.objects.create(user_id = user, url = request.FILES['file'], description = data['description'],\
+                hashtags = data['hashtags'], orientation = data['orientation'])
     return HttpResponse(image)
     
 @csrf_exempt
