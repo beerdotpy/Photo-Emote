@@ -34,18 +34,13 @@ def createImage(request):
     
 @csrf_exempt
 def imageFeed(request):
-    data = json.loads(request.body)
-    images = Image.objects.filter(orientation = data["orientation"])
+    body = json.loads(request.body)
+    images = Image.objects.filter(orientation = body["orientation"])
     imageList = []
     for image in images:
         data = ImageSerializer(image).data
         data['likes_count'] = image.likes.all().count() 
-        try:
-            user = User.objects.get(user_id = data['user'])
-            image.likes.get(user_id = user)
-            data['liked_by_user'] = True
-        except:
-            data['liked_by_user'] = False
+        data['liked_by_user'] = 'True' if body['user_id'] == data['user'] else 'False'
 
         imageList.append(data) 
     return HttpResponse(JSONRenderer().render(imageList), content_type="application/json")
