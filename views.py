@@ -40,7 +40,12 @@ def imageFeed(request):
     for image in images:
         data = ImageSerializer(image).data
         data['likes_count'] = image.likes.all().count() 
-        data['liked_by_user'] = 'True' if body['user_id'] == data['user'] else 'False'
+	try:
+	    user = User.objects.get(user_id = body['user_id'])
+            image.likes.get(user_id = user)
+	    data['liked_by_user'] = True
+        except:
+	    data['liked_by_user'] = False		
 
         imageList.append(data) 
     return HttpResponse(JSONRenderer().render(imageList), content_type="application/json")
